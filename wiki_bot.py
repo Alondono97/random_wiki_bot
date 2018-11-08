@@ -1,15 +1,16 @@
 import requests
 import json 
 import threading
+import os 
 from requests_oauthlib import OAuth1
 
 
 POST_TWEET_URL = 'https://api.twitter.com/1.1/statuses/update.json'
 
-CONSUMER_KEY = 'api-key'
-CONSUMER_SECRET = 'api-secret-key'
-ACCESS_TOKEN = 'access-token'
-ACCESS_TOKEN_SECRET = 'secret-access-token'
+CONSUMER_KEY = os.environ.get(rwb_consumer_key)
+CONSUMER_SECRET = os.environ.get(rwb_consumer_secret)
+ACCESS_TOKEN = os.environ.get(rwb_access_token)
+ACCESS_TOKEN_SECRET = os.environ.get(rwb_access_secret)
 
 oauth = OAuth1(CONSUMER_KEY,
   client_secret=CONSUMER_SECRET,
@@ -30,33 +31,8 @@ def tweet_wiki_article():
 if __name__ == '__main__':  
     
   
-  timer = threading.Timer(3600.0, tweet_wiki_article)
-  timer.start()
   while True:
-      pass
+    tweet_wiki_article()
+    time.sleep(43200)
       
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
