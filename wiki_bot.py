@@ -1,6 +1,7 @@
 import requests
 import json 
 import time
+import wikipedia
 from requests_oauthlib import OAuth1
 
 
@@ -24,18 +25,25 @@ oauth = OAuth1(CONSUMER_KEY,
   resource_owner_key=ACCESS_TOKEN,
   resource_owner_secret=ACCESS_TOKEN_SECRET)
 
-def tweet(link):
-  '''
-  publishes tweet with given link
-  '''
-  tweet_data = {'status': link}
+def tweet(post):
+  
+  #publishes tweet with given link
+  
+  tweet_data = {'status': post}
   req = requests.post(url=POST_TWEET_URL, data=tweet_data, auth=oauth)
 
 def tweet_wiki_article():
+  
+  #requests random wiki page
+  rand_article = wikipedia.random(1)
+  
+  wiki_page = wikipedia.page(rand_article)
+  wiki_summary = wikipedia.summary(rand_article)
+  wiki_url = wiki_page.url 
 
-  wiki_art = requests.get('https://en.wikipedia.org/wiki/special:random')
-  tweet(wiki_art.url)
-
+  tweet(rand_article + ': ' + wiki_url)
+  tweet(wiki_summary)
+  
 if __name__ == '__main__':  
   
   while True:
