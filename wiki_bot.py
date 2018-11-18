@@ -37,12 +37,18 @@ def tweet_wiki_article():
   #requests random wiki page
   rand_article = wikipedia.random(1)
   
+  #get wiki page
   wiki_page = wikipedia.page(rand_article)
+  #page article
   wiki_summary = wikipedia.summary(rand_article)
+  #page url
   wiki_url = wiki_page.url 
 
   tweet(rand_article + ': ' + wiki_url)
+  print('test') #it wouldn't execute both the summary tweet and the link tweet without this
   tweet(wiki_summary)
+  
+  
   
 if __name__ == '__main__':  
   
