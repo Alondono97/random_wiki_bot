@@ -39,8 +39,12 @@ def tweet_wiki_article():
   
   #get wiki page
   wiki_page = wikipedia.page(rand_article)
-  #page article
+  #page article summary
   wiki_summary = wikipedia.summary(rand_article)
+  #keep the summary within twitter char limit
+  if len(wiki_summary) > 280:
+    wiki_summary = wiki_summary[0:280]
+
   #page url
   wiki_url = wiki_page.url 
 
